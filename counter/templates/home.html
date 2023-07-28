@@ -117,12 +117,64 @@
                                         {{ api.0.calories | div:294 | mul:60 | floatformat:0 }} </strong> Minutes</p>
                                 </div>
                             </div>
+                            <div>
+                                <canvas id="myChart"></canvas>
+                            </div>
+
                         </div>
                     </div>
                 </div>
                 {% endif %}
                 {% endif %}
             </div>
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+const ctx = document.getElementById('myChart');
+
+{% comment %}     new Chart(ctx, {
+    type: 'bar',
+    data: {
+        
+        labels: ['Carbohydrates', 'Fat Saturated', 'Fat Total', 'Fiber', 'Protein',  'Sugar'],
+        datasets: [{
+        label: '# of Votes',
+        //data: [1, 2, 3, 4, 5, 6],
+        data: [{{api.0.carbohydrates_total_g}},  {{api.0.fat_saturated_g}}, {{api.0.fat_total_g}}, {{api.0.fiber_g}},  {{ api.0.protein_g }}, {{ api.0.sodium_mg}}], 
+        borderWidth: 1
+      }]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  }); {% endcomment %}
+
+  const config = {
+    type: 'polarArea',
+    data: data,
+    options: {}
+  };
+
+  const data = {
+    datasets: [{
+      label: 'My First Dataset',
+      data: [{{api.0.carbohydrates_total_g}},  {{api.0.fat_saturated_g}}, {{api.0.fat_total_g}}, {{api.0.fiber_g}},  {{ api.0.protein_g }}, {{ api.0.sodium_mg}}], 
+      labels: ['Carbohydrates', 'Fat Saturated', 'Fat Total', 'Fiber', 'Protein',  'Sugar'],
+      backgroundColor: [
+        'rgb(255, 99, 132)',
+        'rgb(75, 192, 192)',
+        'rgb(255, 205, 86)',
+        'rgb(201, 203, 207)',
+        'rgb(54, 162, 235)'
+      ]
+    }]
+  };
+</script>
+ 
 </body>
 
 </html>
